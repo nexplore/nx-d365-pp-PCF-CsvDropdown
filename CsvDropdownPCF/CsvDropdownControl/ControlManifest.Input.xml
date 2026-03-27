@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="Nx.D365.PCF.CustomControls"
+    constructor="CsvDropdownControl"
+    version="1.0.0" 
+    display-name-key="CSV Dropdown Control 1.0.0"
+    description-key="Control that allows you to define array of values that 
+    will be presented in the dropdown menu."
+    control-type="standard">
+
+    <property 
+      name="fieldValue" 
+      display-name-key="Field" 
+      description-key="Field" 
+      of-type-group="numbers" 
+      usage="bound" 
+      required="true" />
+
+    <property 
+      name="csvValues" 
+      display-name-key="CSV Values" 
+      description-key="CSV Values" 
+      of-type="SingleLine.Text" 
+      usage="input" 
+      required="true" />
+
+    <property 
+      name="allowCustomValue" 
+      display-name-key="Allow Custom Value" 
+      description-key="If set to Yes, a custom option is appended that lets the user type a free-text value." 
+      of-type="TwoOptions" 
+      usage="input" 
+      required="true" />
+
+    <property 
+      name="customValueLabel" 
+      display-name-key="Custom Value Label" 
+      description-key="Label shown for the custom value option (default: Benutzerdefiniert…)." 
+      of-type="SingleLine.Text" 
+      usage="input" 
+      required="false" />
+
+    <type-group name="numbers">
+      <type>Whole.None</type>
+      <type>Currency</type>
+      <type>FP</type>
+      <type>Decimal</type>
+      <type>SingleLine.Text</type>
+    </type-group>
+
+    <resources>
+      <code path="index.ts" order="1"/>
+      <css path="css/CsvDropdownControl.css" order="1" />
+    </resources>
+  </control>
+</manifest>
