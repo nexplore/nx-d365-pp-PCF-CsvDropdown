@@ -55,4 +55,14 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
   <Import Project="$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Solution.targets" Condition="Exists('$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Solution.targets')" />
 
+  <Target Name="RenameSolutionZip" BeforeTargets="CleanUpIntermediateFiles">
+    <Copy SourceFiles="$(SolutionPackageZipFilePath)" DestinationFiles="$(OutputPath)CsvDropdown_managed.zip" />
+  </Target>
+
+  <!-- Override to suppress lock errors on intermediate folder cleanup -->
+  <Target Name="CleanUpIntermediateFiles" AfterTargets="PowerAppsPackage">
+    <RemoveDir Directories="$(SolutionPackagerMetadataWorkingDirectory)" Condition="Exists('$(SolutionPackagerMetadataWorkingDirectory)')" ContinueOnError="WarnAndContinue" />
+    <RemoveDir Directories="$(SolutionPackagerLocalizationWorkingDirectory)" Condition="Exists('$(SolutionPackagerLocalizationWorkingDirectory)')" ContinueOnError="WarnAndContinue" />
+  </Target>
+
 </Project>
