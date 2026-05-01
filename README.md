@@ -90,4 +90,4 @@ cd ..
 
 ### Build the Solution
 
-`msbuild /restore /t:rebuild /p:Configuration=Release`
+`msbuild CsvDropdownPCF\pcf-csv-dropdown-control.pcfproj /restore /t:rebuild /p:Configuration=Release`
