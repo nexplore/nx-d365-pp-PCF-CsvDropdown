@@ -19,7 +19,7 @@
     <property 
       name="csvValues" 
       display-name-key="CSV Values" 
-      description-key="CSV Values" 
+      description-key="CSV Values (Delimited using semicolon e.g. val1;val2;val3)" 
       of-type="SingleLine.Text" 
       usage="input" 
       required="true" />

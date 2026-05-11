@@ -439,3 +439,4 @@ export class CsvDropdownControl implements ComponentFramework.StandardControl<II
 		this._notifyOutputChanged();
 	}
 }
+export default CsvDropdownControl;

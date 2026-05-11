@@ -31,32 +31,33 @@ Optionally the user can enter a custom free-text value.
 
 - [Node.js](https://nodejs.org/) (LTS)
 - [Power Platform CLI](https://learn.microsoft.com/en-us/power-platform/developer/cli/introduction) (`pac`)
+- [.NET SDK](https://dotnet.microsoft.com/download) or Visual Studio with MSBuild (required for solution builds)
 
 ### Setup
 
 1. **Power Platform CLI Authentication**:
 
-   ```bash
+   ``` bash
    pac auth create --environment <Environment Url>
    ```
 
 2. **Install**:
 
-   ```bash
+   ``` bash
    npm install
    ```
 
 ### Build and Deployment
 
-1. **Lokaler Build**:
+1. **Local Build**:
 
-   ```bash
+   ``` bash
    npm run build
    ```
 
 2. **Deploy control to environment**:
 
-   ```bash
+   ``` bash
    pac pcf push --incremental --publisher-prefix nx
    ```
 
@@ -64,30 +65,51 @@ Optionally the user can enter a custom free-text value.
 
 1. **Start test Harness**:
 
-   ```bash
+   ``` bash
    npm start
    ```
 
-2. **Watch mode für continuous development**:
+2. **Watch mode for continuous development**:
 
-   ```bash
+   ``` bash
    npm start watch
    ```
 
 ## Build the Power Platform solution
 
+### Increment the version
+
+Before building a new solution for deployment, increase the `version` attribute in `CsvDropdownPCF/CsvDropdownControl/ControlManifest.Input.xml`. Otherwise an existing control in the target environment will not be replaced.
+
+``` xml
+<control ... version="1.0.1" ...>
+```
+
 ### Build the control
 
-From the root folder
+From the root folder:
 
+``` bash
 cd CsvDropdownPCF
-
 npm install
-
 npm run build
-
 cd ..
+```
 
-### Build the Solution
+### Build the solution
 
-`msbuild /restore /t:rebuild /p:Configuration=Release`
+``` bash
+msbuild Solution\Solution.cdsproj /restore /t:rebuild /p:Configuration=Release
+```
+
+The built solution file is placed in `Solution\bin\Release\`.
+
+### Import the solution
+
+Import the generated `.zip` file into your Power Platform environment:
+
+``` bash
+pac solution import --path Solution\bin\Release\<SolutionName>.zip
+```
+
+Or import it manually via the [Power Apps Maker portal](https://make.powerapps.com) under **Solutions → Import solution**.
